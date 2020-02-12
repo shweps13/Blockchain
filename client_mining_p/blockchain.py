@@ -140,10 +140,10 @@ def mine():
 
     response = {
         # TODO: Send a JSON response with the new block
-        "block": new_block
+        "new_block": new_block
     }
 
-    if(data["proof"] and data["id"]): 
+    if (data["proof"] and data["id"]): 
         return jsonify(response), 200
     else:
         return jsonify("Bad Request"), 400

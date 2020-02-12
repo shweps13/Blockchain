@@ -54,6 +54,7 @@ if __name__ == '__main__':
 
     # Run forever until interrupted
     while True:
+        print(f"===getting last block from the server===")
         r = requests.get(url=node + "/last_block")
         # Handle non-json response
         try:
@@ -63,9 +64,10 @@ if __name__ == '__main__':
             print("Response returned:")
             print(r)
             break
+        print(f"===last block was received===")
 
         # TODO: Get the block from `data` and use it to look for a new proof
-        # new_proof = ???
+        new_proof = proof_of_work(data['last_block'])
 
         # When found, POST it to the server {"proof": new_proof, "id": id}
         post_data = {"proof": new_proof, "id": id}
@@ -76,4 +78,12 @@ if __name__ == '__main__':
         # TODO: If the server responds with a 'message' 'New Block Forged'
         # add 1 to the number of coins mined and print it.  Otherwise,
         # print the message from the server.
-        pass
+        lambdacoin = 0
+        return_message = ""
+        # print(data)
+        if data["new_block"] is not None:
+            return_message = "successfully [mined] lambdacoin"
+            lambdacoin += 1
+        else:
+            return_message = "failed, try again"
+        print(f"-==completed mining --> {return_message}==-\n-==total lambdacoins: [{lambdacoin}]==-\n")

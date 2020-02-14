@@ -1,17 +1,13 @@
 import React from 'react'
 import { Card, Icon } from 'semantic-ui-react'
 
-const description = [
-  'Amy is a violinist with 2 years experience in the wedding industry.',
-  'She enjoys the outdoors and currently resides in upstate New York.',
-].join(' ')
 
-const CardExampleExtraContent = () => (
+const CardExampleExtraContent = (props) => (
   <Card>
-    <Card.Content header='About Amy' />
-    <Card.Content description={description} />
+    <Card.Header>Block number {props.index}</Card.Header>
+    <Card.Content>Proof: {props.proof}</Card.Content>
     <Card.Content extra>
-      <Icon name='user' />4 Friends
+      <Icon name='clock' />Timestamp: {props.timestamp}
     </Card.Content>
   </Card>
 )

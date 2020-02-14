@@ -36,10 +36,15 @@ function App() {
           Update chain
           </button>
           <Card.Group centered>
-            <ChainCard/>
-            <ChainCard/>
-            <ChainCard/>
-            <ChainCard/>
+          {chain.map(block => (
+                    <ChainCard 
+                    index={block.index} 
+                    key={block.index}
+                    previous_hash={block.previous_hash}
+                    proof={block.proof}
+                    timestamp={block.timestamp}
+                    />
+                ))}
           </Card.Group>
         </div>
         <div className="RightSide">

@@ -81,7 +81,7 @@ if __name__ == '__main__':
         lambdacoin = 0
         return_message = ""
         # print(data)
-        if data["new_block"] is not None:
+        if data["block"] is not None:
             return_message = "successfully [mined] lambdacoin"
             lambdacoin += 1
         else:

@@ -3,6 +3,9 @@ import './App.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
+import 'semantic-ui-css/semantic.min.css'
+import { Card, Button } from 'semantic-ui-react';
+import ChainCard from './ChainCard'
 
 function App() {
 
@@ -32,6 +35,12 @@ function App() {
           <button className="RefreshBtn" onClick={() => setCount(count + 1)}>
           Update chain
           </button>
+          <Card.Group centered>
+            <ChainCard/>
+            <ChainCard/>
+            <ChainCard/>
+            <ChainCard/>
+          </Card.Group>
         </div>
         <div className="RightSide">
           <p>ololo2</p>

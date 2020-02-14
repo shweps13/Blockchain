@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import 'semantic-ui-css/semantic.min.css'
 import { Card, Button, Header, Icon, Form, Segment } from 'semantic-ui-react';
 import ChainCard from './ChainCard'
+import CoinCard from './CoinCard'
 
 function App() {
 
@@ -18,10 +19,13 @@ function App() {
   const [userID, setUserID] = useState("User");
   const [newuserID, setNewuserID] = useState(initialItem);
   const [coinBal, setCoinBal] = useState(0);
+  const [userOperations, setUserOperations] = useState([]);
+
   let transactList = [];
   let transactFullList = [];
   let userTotal = 0;
   let i;
+  // let userOperations = [];
 
 
   function amount(user){
@@ -40,17 +44,22 @@ function App() {
   }
 
   let checkBal = userID => (
+    setCount(count + 1),
     transactList = [],
     transactFullList = [],
+    setUserOperations([]),
     // Take of all arrays with transactions in separate array
     chain.forEach(block => transactList.push(block.transactions)),
     // First array everytime will be with empty => remove it
     transactList.shift(),
     transactList.forEach(transactionArr => 
       transactionArr.forEach(transaction => transactFullList.push(transaction))),
-    //Now we have array with transactions without mining operations
+    // Now we have array with transactions without mining operations
     // transactList = transactFullList.filter(transaction => transaction.sender != 0),
+    // Adding user transactions to the separate array
+    setUserOperations(transactFullList.filter(transaction => transaction.sender == userID || transaction.recipient == userID)),
     console.log("List of transactions: ", transactFullList),
+    console.log("User transactions: ", userOperations),
     amount(userID)
   )
 
@@ -123,6 +132,20 @@ function App() {
           <div className="BalanceDiv">
               <Header as='h2' block>Your balance is: {coinBal} coins</Header>
             <Button onClick={() => checkBal(userID)}>Check balance</Button>
+          </div>
+          <div className="TransDiv">
+              <Header as='h2' block>Your last transactions:</Header>
+          </div>
+          <div className="CoinBlocks">
+          <Card.Group centered>
+          {userOperations.map(operation => (
+                    <CoinCard 
+                    amount={operation.amount} 
+                    recipient={operation.recipient}
+                    sender={operation.sender}
+                    />
+                ))}
+          </Card.Group>
           </div>
         </div>
       </div>

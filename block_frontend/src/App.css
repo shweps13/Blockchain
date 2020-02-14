@@ -58,11 +58,20 @@
   margin: 4%;
 }
 
-.UserID, .BalanceDiv{
+.UserID, .BalanceDiv, .TransDiv{
   padding-left: 15%;
   padding-right: 15%;
 }
 
+.TransDiv, .CoinBlocks{
+  padding-top: 3%;
+}
+
 .ChangeID{
   padding: 3% 10%;
+}
+
+#root > div > div > div.RightSide > div.CoinBlocks > div > div {
+  width: 80%;
+  margin-top: 1%;
 }

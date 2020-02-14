@@ -4,13 +4,19 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 
 import 'semantic-ui-css/semantic.min.css'
-import { Card, Button } from 'semantic-ui-react';
+import { Card, Button, Header, Icon, Form, Segment } from 'semantic-ui-react';
 import ChainCard from './ChainCard'
 
 function App() {
 
+  const initialItem = {
+    initialID: 'User'
+  };
+
   const [chain, setChain] = useState([]);
   const [count, setCount] = useState(0);
+  const [userID, setUserID] = useState("User");
+  const [newuserID, setNewuserID] = useState(initialItem);
 
 
   useEffect(() => {
@@ -19,9 +25,13 @@ function App() {
       // console.log(response.data.chain);
       setChain(response.data.chain);
     });
-    console.log(chain);
+    console.log("Chain: ", chain);
   }, [count]);
 
+  const changeID = e => {
+    console.log(`User ID was changed to: ${newuserID.initialID}`);
+    setUserID(newuserID.initialID)
+    };
  
   return (
     <div className="App">
@@ -48,7 +58,33 @@ function App() {
           </Card.Group>
         </div>
         <div className="RightSide">
-          <p>ololo2</p>
+          <div className="TopHeader">
+          <Header className="TopHeader" as='h2' floated='right'>
+            <Icon name='settings' />
+            <Header.Content>
+              Account Settings
+              <Header.Subheader>Manage your preferences</Header.Subheader>
+            </Header.Content>
+          </Header>
+          </div >
+          <div className="UserID">
+            <Header as='h2' block>Your user ID is : {userID}</Header>
+          </div>
+          <div className="ChangeID">
+          <Segment inverted>
+            <Form inverted onSubmit={changeID}>
+              <Form.Group widths='equal'>
+                <Form.Input 
+                  onChange={e =>
+                    setNewuserID({ ...newuserID, initialID: e.target.value })
+                }
+                value={newuserID.initialID}
+                fluid label='Change user ID' placeholder='New user ID' />
+              </Form.Group>
+              <Button type='submit' >Submit</Button>
+            </Form>
+          </Segment>
+          </div>
         </div>
       </div>
     </div>

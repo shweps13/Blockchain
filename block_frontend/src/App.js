@@ -1,14 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
+import { useState, useEffect } from 'react';
 
-axios.get('http://localhost:5000/chain')
-.then((response) => {
-  console.log(response.data);
-});
 
 function App() {
+
+  const [chain, setChain] = useState([]);
+  const [count, setCount] = useState(0);
+
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/chain')
+    .then((response) => {
+      // console.log(response.data.chain);
+      setChain(response.data.chain);
+    });
+    console.log(chain);
+  }, [count]);
+
+ 
   return (
     <div className="App">
       <header className="App-header">
@@ -18,8 +29,9 @@ function App() {
       </header>
       <div className="MainBody">
         <div className="LeftSide">
-
-          <p>ololo</p>
+          <button className="RefreshBtn" onClick={() => setCount(count + 1)}>
+          Update chain
+          </button>
         </div>
         <div className="RightSide">
           <p>ololo2</p>

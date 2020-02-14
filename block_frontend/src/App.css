@@ -35,10 +35,15 @@
 
 .LeftSide{
   background-color: rgb(245, 245, 231);
-  display: flex;
-  flex-direction: row;
+  /* display: flex; */
   width: 50%;
   min-height: 95vh;
+}
+
+.RefreshBtn{
+  width: 33%;
+  padding: 5%;
+  margin: 5%;
 }
 
 .RightSide{

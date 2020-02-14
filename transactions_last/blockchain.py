@@ -121,6 +121,7 @@ class Blockchain(object):
 app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
+CORS(app, supports_credentials=True)
 
 # Generate a globally unique address for this node
 node_identifier = str(uuid4()).replace('-', '')

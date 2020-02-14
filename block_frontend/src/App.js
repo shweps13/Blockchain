@@ -20,8 +20,23 @@ function App() {
   const [coinBal, setCoinBal] = useState(0);
   let transactList = [];
   let transactFullList = [];
+  let userTotal = 0;
+  let i;
 
 
+  function amount(user){
+    i = 0;
+    userTotal = 0;
+    for (i = 0; i < transactFullList.length; i++) {
+      if (transactFullList[i].recipient == user) {
+        userTotal = userTotal + transactFullList[i].amount
+      } else 
+      if (transactFullList[i].sender == user) {
+        userTotal = userTotal - transactFullList[i].amount
+      }
+    }
+    console.log("Balance of user is: ", userTotal)
+  }
 
   let checkBal = userID => (
     transactList = [],
@@ -31,8 +46,10 @@ function App() {
     transactList.shift(),
     transactList.forEach(transactionArr => 
       transactionArr.forEach(transaction => transactFullList.push(transaction))),
-    //Now we have array with transactions
-    console.log("List of transactions: ", transactFullList)      
+    //Now we have array with transactions without mining operations
+    transactList = transactFullList.filter(transaction => transaction.sender != 0),
+    console.log("List of transactions: ", transactList),
+    amount(userID)
   )
 
   useEffect(() => {
@@ -102,7 +119,7 @@ function App() {
           </Segment>
           </div>
           <div className="BalanceDiv">
-            <Header as='h2' block>Your balane is:</Header>
+            <Header as='h2' block>Your balance is:</Header>
             <Button onClick={() => checkBal(userID)}>Check balance</Button>
           </div>
         </div>

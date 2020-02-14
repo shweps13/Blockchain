@@ -58,13 +58,11 @@
   margin: 4%;
 }
 
-.UserID{
+.UserID, .BalanceDiv{
   padding-left: 15%;
   padding-right: 15%;
 }
 
 .ChangeID{
-  padding-top: 3%;
-  padding-left: 10%;
-  padding-right: 10%;
+  padding: 3% 10%;
 }

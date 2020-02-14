@@ -17,7 +17,23 @@ function App() {
   const [count, setCount] = useState(0);
   const [userID, setUserID] = useState("User");
   const [newuserID, setNewuserID] = useState(initialItem);
+  const [coinBal, setCoinBal] = useState(0);
+  let transactList = [];
+  let transactFullList = [];
 
+
+
+  let checkBal = userID => (
+    transactList = [],
+    // Take of all arrays with transactions in separate array
+    chain.forEach(block => transactList.push(block.transactions)),
+    // First array everytime will be with empty => remove it
+    transactList.shift(),
+    transactList.forEach(transactionArr => 
+      transactionArr.forEach(transaction => transactFullList.push(transaction))),
+    //Now we have array with transactions
+    console.log("List of transactions: ", transactFullList)      
+  )
 
   useEffect(() => {
     axios.get('http://localhost:5000/chain')
@@ -84,6 +100,10 @@ function App() {
               <Button type='submit' >Submit</Button>
             </Form>
           </Segment>
+          </div>
+          <div className="BalanceDiv">
+            <Header as='h2' block>Your balane is:</Header>
+            <Button onClick={() => checkBal(userID)}>Check balance</Button>
           </div>
         </div>
       </div>

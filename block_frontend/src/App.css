@@ -15,13 +15,38 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 5vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.MainBody {
+  min-height: 95vh;
+  background-color: #b5c2db;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.LeftSide{
+  background-color: rgb(245, 245, 231);
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  min-height: 95vh;
+}
+
+.RightSide{
+  background-color: rgb(184, 235, 184);
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  min-height: 95vh;
 }
 
 .App-link {

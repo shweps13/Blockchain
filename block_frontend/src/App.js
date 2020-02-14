@@ -36,10 +36,12 @@ function App() {
       }
     }
     console.log("Balance of user is: ", userTotal)
+    setCoinBal(userTotal)
   }
 
   let checkBal = userID => (
     transactList = [],
+    transactFullList = [],
     // Take of all arrays with transactions in separate array
     chain.forEach(block => transactList.push(block.transactions)),
     // First array everytime will be with empty => remove it
@@ -47,8 +49,8 @@ function App() {
     transactList.forEach(transactionArr => 
       transactionArr.forEach(transaction => transactFullList.push(transaction))),
     //Now we have array with transactions without mining operations
-    transactList = transactFullList.filter(transaction => transaction.sender != 0),
-    console.log("List of transactions: ", transactList),
+    // transactList = transactFullList.filter(transaction => transaction.sender != 0),
+    console.log("List of transactions: ", transactFullList),
     amount(userID)
   )
 
@@ -119,7 +121,7 @@ function App() {
           </Segment>
           </div>
           <div className="BalanceDiv">
-            <Header as='h2' block>Your balance is:</Header>
+              <Header as='h2' block>Your balance is: {coinBal} coins</Header>
             <Button onClick={() => checkBal(userID)}>Check balance</Button>
           </div>
         </div>
